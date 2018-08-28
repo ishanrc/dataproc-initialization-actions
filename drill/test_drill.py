@@ -27,10 +27,6 @@ class DrillTestCase(DataprocTestCase):
             target_node
         )
         ret_code, stdout, stderr = self.run_command(cmd)
-        print("stderr", stderr)
-        print("stdout", stdout)
-        print("ret_code", ret_code)
-
         self.assertEqual(ret_code, 0, "Failed to run test file. Error: {}".format(stderr))
     '''
     Passing 'Without' indicates using drill-embedded instead of distributed one.
