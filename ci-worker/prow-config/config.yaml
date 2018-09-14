@@ -1,0 +1,27 @@
+plank:
+  default_decoration_config:
+    timeout: 7200000000000 # 2h
+    grace_period: 15000000000 # 15s
+    utility_images:
+      clonerefs: "clonerefs:default"
+      initupload: "initupload:default"
+      entrypoint: "entrypoint:default"
+      sidecar: "sidecar:default"
+    gcs_configuration:
+      bucket: "default-bucket"
+      path_strategy: "legacy"
+      default_org: "ishanrc"
+      default_repo: "dataproc-initialization-options"
+    gcs_credentials_secret: "default-service-account"
+presubmits:
+  ishanrc/dataproc-initialization-actions:
+  - name: test-flink
+    always_run: true
+    decorate: true
+    spec:
+      containers:
+      - image: gcr.io/dataproc-kokoro-tests/ci-test-worker:latest
+        imagePullPolicy: Always
+        env:
+        - name: TEST_MODULE
+          value: flink.test_flink
